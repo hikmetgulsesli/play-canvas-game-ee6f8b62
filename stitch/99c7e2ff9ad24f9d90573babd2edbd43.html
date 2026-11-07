@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Play Page - Play Canvas Game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased">
+  <div data-surface-id="SURF_PLAY_PAGE" class="min-h-screen flex flex-col items-center justify-between p-8 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900">
+    
+    <!-- Top Bar / Header with Title and Score Display -->
+    <header class="w-full max-w-5xl flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-xl text-white shadow-lg shadow-indigo-500/20">
+          P
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight text-white">Play Canvas Game</h1>
+          <p class="text-xs text-slate-400">Route: /play</p>
+        </div>
+      </div>
+
+      <!-- Score Display Surface -->
+      <div data-surface-id="SURF_SCORE_DISPLAY" class="flex items-center gap-4 bg-slate-900/90 border border-slate-800 rounded-xl px-5 py-3 shadow-inner">
+        <div class="text-right">
+          <span class="text-xs uppercase tracking-wider font-semibold text-slate-400 block">Score</span>
+          <span class="text-2xl font-black tabular-nums text-emerald-400">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Game Area -->
+    <main class="w-full max-w-5xl flex-1 flex flex-col items-center justify-center gap-6">
+      <!-- Game Canvas Surface -->
+      <div data-surface-id="SURF_GAME_CANVAS" class="relative w-full aspect-[16/9] max-h-[580px] bg-slate-900 border-2 border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center">
+        <!-- Canvas grid graphic background -->
+        <div class="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+        
+        <!-- Canvas display content -->
+        <div class="relative z-10 flex flex-col items-center text-center p-8 max-w-md">
+          <div class="w-20 h-20 mb-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h2 class="text-lg font-semibold text-slate-200 mb-1">Canvas Arena Ready</h2>
+          <p class="text-sm text-slate-400">Start the session to initialize canvas rendering and game loop.</p>
+        </div>
+
+        <div class="absolute bottom-4 left-4 text-xs font-mono text-slate-500">
+          SURFACE: SURF_GAME_CANVAS [16:9 HD]
+        </div>
+      </div>
+
+      <!-- Action Panel & Status Message -->
+      <div class="w-full flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-900/60 border border-slate-800/80 rounded-xl px-6 py-4">
+        <!-- Status message satisfying observable requirement -->
+        <div class="flex items-center gap-2 text-sm text-slate-300">
+          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-medium text-slate-200">Game started</span>
+          <span class="text-xs text-slate-400">&mdash; Ready for player input</span>
+        </div>
+
+        <!-- Controls -->
+        <div>
+          <button data-action="ACT_START_GAME" data-control-slot="CSLOT_START_GAME_START_BUTTON" class="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold tracking-wide text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg shadow-indigo-600/30 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-slate-900 cursor-pointer">
+            Start Game
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer decoration (non-actionable) -->
+    <footer class="w-full max-w-5xl pt-6 mt-6 border-t border-slate-800 text-center text-xs text-slate-400">
+      Play Canvas Game &copy; 2025. All rights reserved.
+    </footer>
+
+  </div>
+</body>
+</html>
