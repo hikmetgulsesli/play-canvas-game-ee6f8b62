@@ -15,14 +15,22 @@ export interface PlayPagePlayCanvasGameProps {
     "start-game-1"?: () => void;
   };
 
+  /** Current route path bound to the play page surface. */
+  route?: string;
+  /** Current application status ("idle" | "playing"). */
+  status?: string;
+  /** Current high score value (null when nothing is stored). */
+  score?: number | null;
 }
 
 export type PlayPagePlayCanvasGameActionCallbacks = NonNullable<PlayPagePlayCanvasGameProps["actions"]>;
 
-export function PlayPagePlayCanvasGame({ actions }: PlayPagePlayCanvasGameProps) {
+export function PlayPagePlayCanvasGame({ actions, route, status, score }: PlayPagePlayCanvasGameProps) {
+  const scoreValue = score === null || score === undefined ? null : String(score);
+
   return (
     <>
-      <div data-surface-id="SURF_PLAY_PAGE" className="min-h-screen flex flex-col items-center justify-between p-8 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" data-setfarm-element-ref="E000001" data-observable-refs="OBS_LOAD_PLAY_ROUTE_PLAY_ROUTE_LOADED OBS_START_GAME_ROUTE_AFTER_START OBS_START_GAME_START_STATUS_MESSAGE">
+      <div data-surface-id="SURF_PLAY_PAGE" className="min-h-screen flex flex-col items-center justify-between p-8 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" data-setfarm-element-ref="E000001" data-observable-refs="OBS_LOAD_PLAY_ROUTE_PLAY_ROUTE_LOADED OBS_START_GAME_ROUTE_AFTER_START OBS_START_GAME_START_STATUS_MESSAGE" data-route={route} data-status={status}>
           
           {/* Top Bar / Header with Title and Score Display */}
           <header className="w-full max-w-5xl flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
@@ -37,10 +45,10 @@ export function PlayPagePlayCanvasGame({ actions }: PlayPagePlayCanvasGameProps)
             </div>
       
             {/* Score Display Surface */}
-            <div data-surface-id="SURF_SCORE_DISPLAY" className="flex items-center gap-4 bg-slate-900/90 border border-slate-800 rounded-xl px-5 py-3 shadow-inner" data-setfarm-element-ref="E000002" data-observable-refs="OBS_START_GAME_SCORE_VALUE">
+            <div data-surface-id="SURF_SCORE_DISPLAY" className="flex items-center gap-4 bg-slate-900/90 border border-slate-800 rounded-xl px-5 py-3 shadow-inner" data-setfarm-element-ref="E000002" data-observable-refs="OBS_START_GAME_SCORE_VALUE" data-value={scoreValue === null ? undefined : scoreValue}>
               <div className="text-right">
                 <span className="text-xs uppercase tracking-wider font-semibold text-slate-400 block">Score</span>
-                <span className="text-2xl font-black tabular-nums text-emerald-400">0</span>
+                <span className="text-2xl font-black tabular-nums text-emerald-400">{scoreValue === null ? "0" : scoreValue}</span>
               </div>
             </div>
           </header>
